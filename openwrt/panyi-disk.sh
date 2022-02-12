@@ -15,18 +15,18 @@ if [[ ${MAXSIZEMB} -gt 5120 ]]; then
     [ $? != 0 ] && echo "新建分区出错了！" >>/etc/panyi_${board}
     mkfs.ext4 /dev/mmcblk0p3
     [ $? != 0 ] && echo "格式化新分区出错了！" >>/etc/panyi_${board}
-    [[ ! -d /panyi ]] && mkdir -p /panyi
-    mount /dev/mmcblk0p3 /panyi
-    if [ $? = 0 ]; then
-        mkdir -p /panyi/download
-        echo "新分区完成！" >>/etc/panyi_${board}
-        dd if=/dev/zero of=/panyi/.swapfilep bs=512M count=2
-        chown root:root /panyi/.swapfilep
-        chmod 0600 /panyi/.swapfilep
-        mkswap /panyi/.swapfilep
-        swapon /panyi/.swapfilep
-        [ $? = 0 ] && echo "交换分区分配完成！" >>/etc/panyi_${board}
-    fi
+    # [[ ! -d /panyi ]] && mkdir -p /panyi
+    # mount /dev/mmcblk0p3 /panyi
+    # if [ $? = 0 ]; then
+    #    mkdir -p /panyi/download
+    #    echo "新分区完成！" >>/etc/panyi_${board}
+    #     dd if=/dev/zero of=/panyi/.swapfilep bs=512M count=2
+    #     chown root:root /panyi/.swapfilep
+    #     chmod 0600 /panyi/.swapfilep
+    #     mkswap /panyi/.swapfilep
+    #    swapon /panyi/.swapfilep
+    #    [ $? = 0 ] && echo "交换分区分配完成！" >>/etc/panyi_${board}
+    # fi
 else
     echo "[ok] ${PART} 将会扩展到 ${MAXSIZEMB} MB " >>/etc/panyi_${board}
     parted ${DISK} resizepart 2 ${MAXSIZEMB}
