@@ -6,7 +6,7 @@ sleep $((($RANDOM % 1800) + 1))
 cd /panyi/shell/cloudflare
 
 if [[ ! -f "CloudflareST" ]]; then
-	wget -N https://github.com/XIU2/CloudflareSpeedTest/releases/download/v2.0.2/CloudflareST_linux_arm64.tar.gz
+	wget -N https://github.com/XIU2/CloudflareSpeedTest/releases/download/v2.0.3/CloudflareST_linux_arm64.tar.gz
 	tar -xvf CloudflareST_linux_arm64.tar.gz
 	chmod +x CloudflareST
 fi
@@ -15,7 +15,7 @@ fi
 /etc/init.d/passwall stop
 wait
 
-./CloudflareST -dn 10 -tll 40 -o cf_result.txt
+./CloudflareST -dn 10 -tll 30 -o cf_result.txt
 wait
 sleep 3
 
